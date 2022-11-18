@@ -1105,25 +1105,52 @@ int enable_audio_route(struct audio_device *adev,
     ALOGV("%s: enter: usecase(%d)", __func__, usecase->id);
 
     if (usecase->type == PCM_CAPTURE) {
+
+        ALOGV("%s: enter: type PCM_CAPTURE", __func__);
+
         struct stream_in *in = usecase->stream.in;
+
+        ALOGV("%s: enter: stream(%p)", __func__, &in->stream);
+
         struct audio_usecase *uinfo;
         snd_device = usecase->in_snd_device;
 
         if (in) {
+
+            ALOGV("%s: enter: if (in)", __func__);
+
             if (in->enable_aec || in->enable_ec_port) {
+
+                ALOGV("%s: enter: if (in->enable_aec || in->enable_ec_port)", __func__);
+
                 audio_devices_t out_device = AUDIO_DEVICE_OUT_SPEAKER;
                 struct listnode *node;
                 struct audio_usecase *voip_usecase = get_usecase_from_list(adev,
                                                            USECASE_AUDIO_PLAYBACK_VOIP);
+
+                ALOGV("%s: enter: get_usecase_from_list(adev, USECASE_AUDIO_PLAYBACK_VOIP)", __func__);
+
                 if (voip_usecase) {
+
+                    ALOGV("%s: enter: if (voip_usecase)", __func__);
+
                     out_device = voip_usecase->stream.out->devices;
                 } else if (adev->primary_output &&
                               !adev->primary_output->standby) {
+
+                    ALOGV("%s: enter: if (adev->primary_output && !adev->primary_output->standby))", __func__);
+
                     out_device = adev->primary_output->devices;
                 } else {
                     list_for_each(node, &adev->usecase_list) {
                         uinfo = node_to_item(node, struct audio_usecase, list);
+
+                        ALOGV("%s: enter: else: uinfo(%d)", __func__, uinfo->id);
+
                         if (uinfo->type != PCM_CAPTURE) {
+
+                            ALOGV("%s: enter: if (uinfo->type != PCM_CAPTURE)", __func__);
+
                             out_device = uinfo->stream.out->devices;
                             break;
                         }
@@ -1134,9 +1161,15 @@ int enable_audio_route(struct audio_device *adev,
             }
         }
     } else if (usecase->type == TRANSCODE_LOOPBACK_TX) {
+
+        ALOGV("%s: enter: type TRANSCODE_LOOPBACK_TX", __func__);
+
         snd_device = usecase->in_snd_device;
     } else {
         snd_device = usecase->out_snd_device;
+
+        ALOGV("%s: enter: type OTHER", __func__);
+
     }
 
 #ifdef DS1_DOLBY_DAP_ENABLED
