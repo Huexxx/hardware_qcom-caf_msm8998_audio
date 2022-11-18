@@ -18,7 +18,7 @@
  */
 
 #define LOG_TAG "audio_hw_utils"
-/* #define LOG_NDEBUG 0 */
+#define LOG_NDEBUG 0
 
 #include <inttypes.h>
 #include <errno.h>
