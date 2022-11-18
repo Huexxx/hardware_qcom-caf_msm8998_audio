@@ -1123,7 +1123,7 @@ int enable_audio_route(struct audio_device *adev,
                 } else {
                     list_for_each(node, &adev->usecase_list) {
                         uinfo = node_to_item(node, struct audio_usecase, list);
-                        if (uinfo->type != PCM_CAPTURE) {
+                        if (uinfo->type != PCM_CAPTURE && uinfo->id != 72) {
                             out_device = uinfo->stream.out->devices;
                             break;
                         }
