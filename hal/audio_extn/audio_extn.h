@@ -456,6 +456,7 @@ void audio_extn_listen_set_parameters(struct audio_device *adev,
 #define audio_extn_sound_trigger_read(in, buffer, bytes)               (0)
 #define audio_extn_sound_trigger_check_ec_ref_enable()                 (0)
 #define audio_extn_sound_trigger_update_ec_ref_status(on)              (0)
+#define audio_extn_utils_release_snd_device(snd_dev)                   (0)
 #else
 
 enum st_event_type {
@@ -484,6 +485,7 @@ void audio_extn_sound_trigger_get_parameters(const struct audio_device *adev,
                      struct str_parms *query, struct str_parms *reply);
 bool audio_extn_sound_trigger_check_ec_ref_enable();
 void audio_extn_sound_trigger_update_ec_ref_status(bool on);
+void audio_extn_utils_release_snd_device(snd_device_t snd_device);
 #endif
 
 #ifndef AUXPCM_BT_ENABLED
@@ -815,7 +817,6 @@ bool audio_extn_utils_is_dolby_format(audio_format_t format);
 int audio_extn_utils_get_bit_width_from_string(const char *);
 int audio_extn_utils_get_sample_rate_from_string(const char *);
 int audio_extn_utils_get_channels_from_string(const char *);
-void audio_extn_utils_release_snd_device(snd_device_t snd_device);
 bool audio_extn_utils_is_vendor_enhanced_fwk();
 int audio_extn_utils_get_vendor_enhanced_info();
 int audio_extn_utils_get_app_sample_rate_for_device(struct audio_device *adev,
