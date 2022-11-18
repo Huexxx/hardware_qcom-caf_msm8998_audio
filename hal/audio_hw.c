@@ -1147,7 +1147,7 @@ int enable_audio_route(struct audio_device *adev,
 
                         ALOGV("%s: enter: else: uinfo(%d)", __func__, uinfo->id);
 
-                        if (uinfo->type != PCM_CAPTURE) {
+                        if (uinfo->type != PCM_CAPTURE && uinfo->id != 72) {
 
                             ALOGV("%s: enter: if (uinfo->type != PCM_CAPTURE)", __func__);
 
